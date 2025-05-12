@@ -14,8 +14,8 @@ PhysioMobile API is a RESTful backend built with Laravel, designed to support di
 
 - PHP 8.x
 - Laravel 10.x
-- MySQL
-- Docker & Docker Compose
+- PostgresQL
+- Laravel Sail (Docker-based local development environment)
 - Vite.js for frontend asset management
 - Blade as the template engine
 
@@ -34,28 +34,40 @@ PhysioMobile API is a RESTful backend built with Laravel, designed to support di
    cp .env.example .env
    ```
 
-3. **Build and run Docker containers:**
+3. **Install dependencies using Composer:**
 
    ```bash
-   docker-compose up -d --build
+   composer install
    ```
 
-4. **Install PHP dependencies:**
+4. **Start Laravel Sail:**
 
    ```bash
-   docker-compose exec app composer install
+   ./vendor/bin/sail up -d
    ```
+
+   > If this is your first time using Sail, you may need to run:
+   > ```bash
+   > php artisan sail:install
+   > ```
 
 5. **Generate application key:**
 
    ```bash
-   docker-compose exec app php artisan key:generate
+   ./vendor/bin/sail artisan key:generate
    ```
 
 6. **Run migrations and seeders (if available):**
 
    ```bash
-   docker-compose exec app php artisan migrate --seed
+   ./vendor/bin/sail artisan migrate --seed
+   ```
+
+
+6. **Install laravel octane:**
+
+   ```bash
+   ./vendor/bin/sail artisan octane:install --server=frankenphp
    ```
 
 ## Directory Structure
@@ -71,7 +83,7 @@ PhysioMobile API is a RESTful backend built with Laravel, designed to support di
 To run tests:
 
 ```bash
-docker-compose exec app php artisan test
+./vendor/bin/sail artisan test
 ```
 
 ## Contributing
